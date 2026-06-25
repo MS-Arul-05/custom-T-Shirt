@@ -4,27 +4,22 @@ A modern fashion-tech storefront for **FITBOX**: premium custom apparel, streetw
 drops, a real-time custom T-shirt builder, a gamified mystery box, and a community
 designer marketplace. Made & printed in India 🇮🇳.
 
-> This repository contains two things:
-> 1. **`project/`** — the actual web app (Next.js 14, runnable, production-built).
-> 2. **Design docs** (`00_Orchestrator.md` … `07_Guide.md`, `ecomm_01.md`) — the full
->    product/architecture/design specification that describes the production target.
+> The Next.js app lives at the repository root (zero-config deploy on Vercel).
+> The full product/architecture/design specification is in [`docs/`](docs/).
 
 ---
 
-## 🚀 Quick start (the app)
+## 🚀 Quick start
 
 ```bash
-cd project
 npm install
 npm run dev      # http://localhost:3032
 ```
 
-Other scripts (run inside `project/`):
-
 | Script | What it does |
 |--------|--------------|
 | `npm run dev` | Start the dev server on port 3032 |
-| `npm run build` | Production build (static export → `project/out/`) |
+| `npm run build` | Production build (static export → `out/`) |
 | `npm run start` | Serve the production build |
 | `npm run lint` | ESLint (`next/core-web-vitals`) |
 | `npm run typecheck` | TypeScript type-check (`tsc --noEmit`) |
@@ -51,7 +46,7 @@ Other scripts (run inside `project/`):
 
 ---
 
-## 🧱 Tech stack (app)
+## 🧱 Tech stack
 
 Next.js 14 (App Router, **static export**) · React 18 · TypeScript (strict) ·
 Tailwind CSS · Framer Motion · Zustand (cart + builder state) · Lucide icons ·
@@ -61,11 +56,11 @@ Cabinet Grotesk (headings) + Inter (body) · Vitest + Testing Library.
 `#00C853` success. Prices are stored as integer **INR paise** and formatted with
 `Intl.NumberFormat('en-IN')`.
 
-> **Note:** the app is currently a **frontend with mock data** (`project/src/lib`) and is
-> built as a static export — checkout, AI design generation, and mystery-box purchase are
+> **Note:** this app is currently a **frontend with mock data** (`src/lib`) built as a
+> static export — checkout, AI design generation, and mystery-box purchase are
 > client-side mock flows. The full production architecture (Supabase, Razorpay + Stripe,
 > Resend, and a Node/Express "Studio API" on Railway for AI/preview rendering) is
-> specified in the design docs and `project/.env.example`.
+> specified in [`docs/`](docs/) and `.env.example`.
 
 ---
 
@@ -75,31 +70,30 @@ Cabinet Grotesk (headings) + Inter (body) · Vitest + Testing Library.
 catalog / collections / mystery-box / builder / reviews data layers.
 
 ```bash
-cd project && npm test
+npm test
 ```
 
 ---
 
-## 📁 Repository layout
+## 📁 Layout
 
 ```
 .
-├── 00_Orchestrator.md … 07_Guide.md   # product + architecture + design spec
-├── ecomm_01.md                        # source prompt / platform variations
-├── Assets/                            # original product photography
-└── project/                          # the Next.js app
-    ├── src/app/                      # routes
-    ├── src/components/               # UI (layout, product, builder, mystery-box, …)
-    ├── src/lib/                      # mock data + helpers
-    ├── src/store/                    # Zustand stores (cart, builder)
-    └── public/products/              # product images
+├── src/app/            # routes
+├── src/components/     # UI (layout, product, builder, mystery-box, …)
+├── src/lib/            # mock data + helpers
+├── src/store/          # Zustand stores (cart, builder)
+├── public/products/    # product images
+└── docs/               # product + architecture + design spec, Assets/ (source photos)
 ```
 
-## 🚢 Deploy
+---
 
-The app is a static export. Build with `cd project && npm run build` and deploy the
-generated `project/out/` to any static host (Vercel, Netlify, GitHub Pages, S3, …).
-On Vercel, set the **Root Directory** to `project`.
+## 🚢 Deploy (Vercel — zero config)
+
+The app is at the repo root, so Vercel auto-detects Next.js — just import the repo and
+deploy. It builds as a static export (`out/`). For any other static host, run
+`npm run build` and serve `out/`.
 
 ## License
 
